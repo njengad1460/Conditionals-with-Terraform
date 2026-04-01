@@ -21,6 +21,11 @@ module "webserver_cluster" {
   # Application settings
   server_port        = var.server_port
   enable_autoscaling = var.enable_autoscaling
+
+  use_existing_vpc   = var.use_existing_vpc
+  existing_vpc_id    = var.existing_vpc_id
+
+
 }
 
 # Production Outputs
@@ -30,5 +35,6 @@ output "alb_url" {
 }
 
 output "asg_name" {
-  value       = module.webserver_cluster.asg_name
+  value       = module.webserver_cluster.asg_name 
+  description = "The name of the Auto Scaling Group"
 }
