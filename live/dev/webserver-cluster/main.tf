@@ -21,6 +21,10 @@ module "webserver_cluster" {
   # Application settings
   server_port        = var.server_port
   enable_autoscaling = var.enable_autoscaling
+
+  # ADD THESE TWO LINES:
+  use_existing_vpc   = var.use_existing_vpc
+  existing_vpc_id    = var.existing_vpc_id
 }
 
 # Output the URL for easy access after deployment
