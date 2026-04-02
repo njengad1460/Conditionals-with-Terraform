@@ -140,7 +140,8 @@ resource "aws_alb" "alb" {
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = local.subnet_ids
 
-  enable_deletion_protection = local.is_prod
+  # enable_deletion_protection = local.is_prod   
+  enable_deletion_protection = false # disabled deletion protection to allow all resource deletion
 }
 
 # --- TARGET GROUPS ---
