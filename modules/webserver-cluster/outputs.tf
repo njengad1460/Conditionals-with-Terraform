@@ -14,7 +14,7 @@ output "asg_name" {
 
 
 output "cpu_alarm_arn" {
-  value       = (local.is_prod || var.enable_autoscaling) ? aws_cloudwatch_metric_alarm.high_cpu[0].arn : null
+  value       = var.enable_autoscaling ? aws_cloudwatch_metric_alarm.high_cpu[0].arn : null
   description = "The ARN of the CloudWatch CPU alarm"
 }
 
