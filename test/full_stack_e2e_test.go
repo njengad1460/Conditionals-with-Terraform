@@ -15,24 +15,6 @@ func TestFullStackEndToEnd(t *testing.T) {
 
 	uniqueID := random.UniqueId()
 
-	// NOTE: These paths assume a full multi-module structure. 
-	// If you move VPC and Database to their own modules, update these paths.
-	
-	// Deploy VPC first (using placeholder path as per request)
-	// vpcOptions := &terraform.Options{
-	// 	TerraformDir: "../modules/networking/vpc",
-	// 	Vars: map[string]interface{}{
-	// 		"vpc_name": fmt.Sprintf("test-vpc-%s", uniqueID),
-	// 	},
-	// }
-	// Uncomment these if/when the networking/vpc module is created
-	// defer terraform.Destroy(t, vpcOptions)
-	// terraform.InitAndApply(t, vpcOptions)
-
-	// vpcID     := terraform.Output(t, vpcOptions, "vpc_id")
-	// subnetIDs := terraform.OutputList(t, vpcOptions, "private_subnet_ids")
-
-	// Deploy app using VPC outputs (Example setup)
 	appOptions := &terraform.Options{
 		TerraformDir: "../modules/webserver-cluster",
 		Vars: map[string]interface{}{
