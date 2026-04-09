@@ -34,5 +34,15 @@ func TestFullStackEndToEnd(t *testing.T) {
 	terraform.InitAndApply(t, appOptions)
 
 	albDnsName := terraform.Output(t, appOptions, "alb_dns_name")
-	http_helper.HttpGetWithRetry(t, fmt.Sprintf("http://%s", albDnsName), nil, 200, "Hello", 30, 10*time.Second)
+	// Retry for up to 5 minutes — ALB takes time to register instances
+	http_helper.HttpGetWithRetryWithCustomValidation(
+		t,
+		fmt.Sprintf("http://%s", albDnsName),
+		nil,
+		30,
+		10*time.Second,
+		func(status int, body string) bool {
+			return status == 200 && len(body) > 0
+		},
+	)
 }
